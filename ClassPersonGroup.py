@@ -3,7 +3,6 @@ import classes.ClassConfig
 
 config = classes.ClassConfig.Config().readConfig()
 
-
 class PersonGroup:
     def __init__(self):
         self.api_key = config["api_key"]
@@ -16,7 +15,6 @@ class PersonGroup:
         )
 
         headers = {
-            # Request headers
             "Ocp-Apim-Subscription-Key": self.api_key,
         }
 
