@@ -24,7 +24,6 @@ class Config:
             config = json.load(f)
         return config
 
-
     def setConfig(self):
         config = self.readConfig()
         print('每個參數後的[]內代表目前的設定值，直接按 ENTER 代表不更改。')
