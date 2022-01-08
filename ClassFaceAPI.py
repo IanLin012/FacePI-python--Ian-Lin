@@ -6,7 +6,6 @@ import classes.ClassPersonGroup
 class Face:
     def __init__(self) -> None:
         self.config = classes.ClassConfig.Config().readConfig()
-
         # 用本地端的圖檔進行辨識。
 
     def detectLocalImage(self, imagepath):
@@ -28,7 +27,6 @@ class Face:
                 "faceIdTimeToLive": "86400",
             }
         )
-        #'age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure'
         print("imagepath=", imagepath)
         requestbody = open(imagepath, "rb").read()
         try:
@@ -70,7 +68,6 @@ class Face:
                 "faceIdTimeToLive": "86400",
             }
         )
-        #'age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure'
         print("imageurl=", imageurl)
         requestbody = '{"url": "' + imageurl + '"}'
         try:
@@ -142,25 +139,4 @@ class Face:
                     personGroupId, self.config["personGroupName"], "group userdata"
                 )
                 return self.identify(faceidkeys, personGroupId)
-
-        # try:
-        #     if ClassUtils.isFaceAPIError(identifiedfaces):
-        #         return []
-        # except MyException.RateLimitExceededError as e:
-        #     time.sleep(10)
-        #     return self.identify(faceidkeys, personGroupId)
-        # except MyException.PersonGroupNotFoundError as e:
-        #     personGroupAPI = PersonGroup(self.api_key, self.host)
-        #     personGroupAPI.createPersonGroup(
-        #         personGroupId, config["personGroupName"], "group userdata"
-        #     )
-        #     return self.identify(faceidkeys, personGroupId)
-        # except MyException.UnspecifiedError as e:
-        #     return []
-        # except MyException.PersonGroupNotTrainedError as e:
-        #     print("丟出 MyException.PersonGroupNotTrainedError 例外")
-        #     raise
-        # print("超過 raise")
-        # if ClassUtils.isFaceAPIError(identifyfaces):
-        #     return []
         return identifiedfaces
