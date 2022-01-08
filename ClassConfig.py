@@ -27,3 +27,4 @@ class Config:
         title = input(f'請輸入 title[{config["title"]}]: ')
         if title: config['title'] = title
         self.writeConfig(config)
+        print(type(config))
