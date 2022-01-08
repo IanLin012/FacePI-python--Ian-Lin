@@ -8,7 +8,6 @@ import classes.ClassConfig
 
 config = classes.ClassConfig.Config().readConfig()
 
-
 class FacePI:
     def show_opencv(self):
         classes.ClassOpenCV.show_opencv("")
@@ -49,7 +48,6 @@ class FacePI:
 
         print("Identify.detectfaces=", detectfaces)
 
-        #        try:
         identifiedfaces = faceApi.identify(faceids[:10], config["personGroupId"])
         # print("在所提供的相片中偵測到 identifyfaces 共 ", len(identifiedfaces), "個")
         # except MyException.PersonGroupNotTrainedError as e:
@@ -70,7 +68,7 @@ class FacePI:
                 identifiedface["confidence"] = candidate["confidence"]
                 identifiedface["personId"] = candidate["personId"]
 
-        ### cv_Identifyfaces() 精簡版
+        # cv_Identifyfaces() 精簡版
         for identifyface in identifiedfaces:
             if "person" not in identifyface:
                 print("identifyface=", identifyface)
@@ -91,10 +89,9 @@ class FacePI:
         """
         刷臉簽到
         """
-        #        imagepath = '202994853.jpg'
-        #        imagepath = 'face4.jpg'
-        #        self.detectLocalImage(imagepath)
-        #
+        # imagepath = '202994853.jpg'
+        # imagepath = 'face4.jpg'
+        # self.detectLocalImage(imagepath)
         # imageurl = 'https://cdn-news.readmoo.com/wp-content/uploads/2016/07/Albert_einstein_by_zuzahin-d5pcbug-1140x600.jpg'
         # imageurl = 'https://cdn2.momjunction.com/wp-content/uploads/2020/11/facts-about-albert-einstein-for-kids-720x810.jpg'
         # classes.ClassFaceAPI.Face().detectImageUrl(imageurl)
