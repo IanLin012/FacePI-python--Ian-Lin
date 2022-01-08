@@ -26,7 +26,6 @@ def getTakePicturePath(personGroupId):
 def show_opencv(hint='', mirror=True):
     ''' 顯示主畫面 '''
 
-    #cam = cv2.VideoCapture(config['videoid'])
     print('cam opening...')
     cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
     print('cam opened')
@@ -43,9 +42,9 @@ def show_opencv(hint='', mirror=True):
 
         cv2_im = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 
         pil_im = Image.fromarray(cv2_im)
-        draw = ImageDraw.Draw(pil_im)  #
+        draw = ImageDraw.Draw(pil_im)
 
-        ##font = ImageFont.truetype(ttf, 40, encoding="utf-8")
+        #font = ImageFont.truetype(ttf, 40, encoding="utf-8")
         hintfont = ImageFont.truetype(ttf, 24, encoding="utf-8")
 
         hints = "請按「ENTER」繼續" + hint
@@ -56,7 +55,7 @@ def show_opencv(hint='', mirror=True):
         #textlocation = (0,0)
         draw.text(
             hintlocation, hints, (0, 255, 255),
-            font=hintfont)  #
+            font=hintfont)
 
         cv2_text_im = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
 
