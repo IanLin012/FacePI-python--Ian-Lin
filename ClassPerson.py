@@ -4,7 +4,6 @@ import classes.ClassPersonGroup
 
 config = classes.ClassConfig.Config().readConfig()
 
-
 class Person:
     def __init__(self):
         self.api_key = config["api_key"]
@@ -55,15 +54,6 @@ class Person:
         except Exception as e:
             print("[Errno {0}]連線失敗！請檢查網路設定。 {1}".format(e.errno, e.strerror))
 
-        # try:
-        #     if ClassUtils.isFaceAPIError(jsondata):
-        #         return []
-        # except MyException.RateLimitExceededError as e:
-        #     time.sleep(10)
-        #     return self.add_a_person_face(imagepath, personId, personGroupId)
-        # except MyException.UnspecifiedError as e:
-        #     return
-
     def create_a_person(self, personGroupId, name, userData):
         # person group 已經存在的話，這裡會出錯。
         # personGroupApi = classes.ClassPersonGroup.PersonGroup()
@@ -110,21 +100,6 @@ class Person:
                     config["personGroupId"], config["personGroupName"], "group userdata"
                 )
                 return self.create_a_person(personGroupId, name, userData)
-        # try:
-        #     if ClassUtils.isFaceAPIError(create_a_person_json):
-        #         return []
-        # except MyException.RateLimitExceededError as e:
-        #     time.sleep(10)
-        #     return self.create_a_person(personGroupId, name, userData)
-        # except MyException.PersonGroupNotFoundError as e:
-        #     personGroupApi = PersonGroup(self.api_key, self.host)
-        #     personGroupApi.createPersonGroup(
-        #         config["personGroupId"], config["personGroupName"], "group userdata"
-        #     )
-        #     return self.create_a_person(personGroupId, name, userData)
-        # except MyException.UnspecifiedError as e:
-        #     return
-
         return create_a_person_json["personId"]
 
     def add_personimages(self, personGroupId, personname, userData, imagepaths):
@@ -144,7 +119,6 @@ class Person:
 
     def get_a_person(self, personId, personGroupId):
         headers = {
-            # Request headers
             'Ocp-Apim-Subscription-Key': self.api_key,
         }
 
@@ -159,18 +133,6 @@ class Person:
             data = response.read()
             personjson = json.loads(str(data, 'UTF-8'))
             conn.close()
-
-            # try:
-            #     if ClassUtils.isFaceAPIError(personjson):
-            #         return None
-            # except MyException.RateLimitExceededError as e:
-            #     time.sleep(10)
-            #     return self.get_a_person(personId, personGroupId)
-            # except MyException.UnspecifiedError as e:
-            #     return
-            # except MyException.PersonGroupNotTrainedError as e:
-            #     print('ERROR: get_a_person.PersonGroupNotTrainedError')
-            #     return
             return personjson
             
         except Exception as e:
