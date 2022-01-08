@@ -18,6 +18,7 @@ def getTakePicturePath(personGroupId):
     return jpgimagepath
 def show_opencv(hint='', mirror=True):
     ''' 顯示主畫面 '''
+    cam = cv2.VideoCapture(config['videoid'])
     print('cam opening...')
     cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
     print('cam opened')
@@ -57,6 +58,7 @@ def show_opencv(hint='', mirror=True):
         cv2.imshow("window", img)
         key = cv2.waitKey(1)
         if key == ord(' ') or key == 3 or key == 13:
+        #space or enter
             picturepath = getTakePicturePath(
                 config['personGroupId'])
             ret_val, img = cam.read()
@@ -65,6 +67,7 @@ def show_opencv(hint='', mirror=True):
             cv2.VideoCapture(0).release()
             return picturepath
         elif key == 27:
+        #esc to quit
             cv2.destroyAllWindows()
             cv2.VideoCapture(0).release()
             raise print("偵測到 esc 結束鏡頭")
@@ -83,11 +86,11 @@ def show_ImageText(title, hint, facepath=None, picture=None, identifyfaces=None,
         print('__cv_ImageText.imagepath=', facepath)
         H, W = img.shape[:2]
         img = cv2.resize(img, (400, int(H / W * 400)))
-
     windowname = facepath
     H, W = img.shape[:2]
     img = cv2.resize(img, (400,int(H/W*400)))
-    cv2_im = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # cv2和PIL中颜色的hex码的储存顺序不同
+    cv2_im = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    #cv2和PIL中顏色的hex碼的儲存順序不同
     pil_im = Image.fromarray(cv2_im)
     draw = ImageDraw.Draw(pil_im)
     # 括號中為需要打印的canvas，這裡就是在圖片上直接打印
@@ -109,6 +112,7 @@ def show_ImageText(title, hint, facepath=None, picture=None, identifyfaces=None,
     cv2.imshow(windowname, cv2_text_im)
     key = cv2.waitKey(10000)
     if key == ord(' ') or key == 3 or key == 13:
+    #space or enter
         cv2.destroyWindow(windowname)
     elif key == ord('a') and len(identifyfaces) == 1:
         # 鍵盤 a 代表要新增 oneshot
